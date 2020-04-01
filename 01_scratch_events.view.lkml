@@ -96,7 +96,7 @@ view: scratch_pv_01 {
           ev.name_tracker, -- included to filter on
           ev.dvce_created_tstamp -- included to sort on
 
-        FROM demo.events AS ev
+        FROM analytics.snowplow_events AS ev
 
         INNER JOIN ${scratch_pv_00.SQL_TABLE_NAME} AS wp -- an INNER JOIN guarantees that all rows have a page view ID
           ON ev.event_id = wp.root_id
