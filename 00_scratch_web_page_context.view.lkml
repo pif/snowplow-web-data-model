@@ -24,7 +24,7 @@ view: scratch_pv_00 {
         SELECT
 
           root_id,
-          id AS page_view_id
+          page_view_id
 
         FROM wall_e_snowplow.snowplow_web_page_context
 

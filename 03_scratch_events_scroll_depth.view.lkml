@@ -31,15 +31,15 @@ view: scratch_pv_03 {
           MAX(ev.br_viewwidth) AS br_viewwidth,
           MAX(ev.br_viewheight) AS br_viewheight,
 
-          -- NVL replaces NULL with 0 (because the page view event does send an offset)
+          -- COALESCE replaces NULL with 0 (because the page view event does send an offset)
           -- GREATEST prevents outliers (negative offsets)
           -- LEAST also prevents outliers (offsets greater than the docwidth or docheight)
 
-          LEAST(GREATEST(MIN(NVL(ev.pp_xoffset_min, 0)), 0), MAX(ev.doc_width)) AS hmin, -- should be zero
-          LEAST(GREATEST(MAX(NVL(ev.pp_xoffset_max, 0)), 0), MAX(ev.doc_width)) AS hmax,
+          LEAST(GREATEST(MIN(COALESCE(ev.pp_xoffset_min, 0)), 0), MAX(ev.doc_width)) AS hmin, -- should be zero
+          LEAST(GREATEST(MAX(COALESCE(ev.pp_xoffset_max, 0)), 0), MAX(ev.doc_width)) AS hmax,
 
-          LEAST(GREATEST(MIN(NVL(ev.pp_yoffset_min, 0)), 0), MAX(ev.doc_height)) AS vmin, -- should be zero (edge case: not zero because the pv event is missing - but these are not in scratch.dev_pv_01 so not an issue)
-          LEAST(GREATEST(MAX(NVL(ev.pp_yoffset_max, 0)), 0), MAX(ev.doc_height)) AS vmax
+          LEAST(GREATEST(MIN(COALESCE(ev.pp_yoffset_min, 0)), 0), MAX(ev.doc_height)) AS vmin, -- should be zero (edge case: not zero because the pv event is missing - but these are not in scratch.dev_pv_01 so not an issue)
+          LEAST(GREATEST(MAX(COALESCE(ev.pp_yoffset_max, 0)), 0), MAX(ev.doc_height)) AS vmax
 
         FROM analytics.snowplow_events AS ev
 

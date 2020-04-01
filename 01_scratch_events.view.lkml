@@ -107,7 +107,7 @@ view: scratch_pv_01 {
 
       -- more than one page view event per page view ID? select the first one
 
-      SELECT * FROM (SELECT *, ROW_NUMBER () OVER (PARTITION BY page_view_id ORDER BY dvce_created_tstamp) AS n FROM prep) WHERE n = 1
+      SELECT * FROM (SELECT *, ROW_NUMBER () OVER (PARTITION BY page_view_id ORDER BY dvce_created_tstamp) AS n FROM prep) temp_aaaa WHERE n = 1
        ;;
     # sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_00.SQL_TABLE_NAME} ;;
     distribution: "page_view_id"

@@ -43,7 +43,7 @@ view: sessions {
               b.session_end_local,
 
               -- engagement
-              b.user_bounced,
+              -- b.user_bounced,
               b.page_views,
               b.time_engaged_in_s,
 
@@ -261,11 +261,11 @@ view: sessions {
     value_format: "0\"s\""
   }
 
-  dimension: user_bounced {
-    type: yesno
-    sql: ${TABLE}.user_bounced ;;
-    group_label: "Engagement"
-  }
+  #dimension: user_bounced {
+  #  type: yesno
+  #  sql: ${TABLE}.user_bounced ;;
+  #  group_label: "Engagement"
+  #}
 
   dimension: user_engaged {
     type: yesno
@@ -681,17 +681,17 @@ view: sessions {
     fields: [domain_userid, users.first_page_url, session_count, average_time_engaged, total_time_engaged]
   }
 
-  measure: bounced_user_count {
-    type: count_distinct
-    sql: ${domain_userid} ;;
-
-    filters: {
-      field: user_bounced
-      value: "yes"
-    }
-
-    group_label: "Counts"
-  }
+  #measure: bounced_user_count {
+  #  type: count_distinct
+  #  sql: ${domain_userid} ;;
+#
+ #   filters: {
+  #    field: user_bounced
+   #   value: "yes"
+    #}
+#
+ #   group_label: "Counts"
+  #}
 
   # Engagement
 

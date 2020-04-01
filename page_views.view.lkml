@@ -306,11 +306,11 @@ view: page_views {
     value_format: "0\%"
   }
 
-  dimension: user_bounced {
-    type: yesno
-    sql: ${TABLE}.page_view_in_session_index = 1 ;;
-    group_label: "Engagement"
-  }
+  #dimension: user_bounced {
+  #  type: yesno
+  #  sql: ${TABLE}.page_view_in_session_index = 1 ;;
+  #  group_label: "Engagement"
+  #}
 
   # Page
 
@@ -818,17 +818,16 @@ view: page_views {
     group_label: "Counts"
   }
 
-  measure: bounced_page_view_count {
-    type: count_distinct
-    sql: ${page_view_id} ;;
-
-    filters: {
-      field: user_bounced
-      value: "yes"
-    }
-
-    group_label: "Counts"
-  }
+  #measure: bounced_page_view_count {
+  #  type: count_distinct
+  #  sql: ${page_view_id} ;;
+##    filters: {
+  #    field: user_bounced
+  #    value: "yes"
+  #  }#
+#
+ #   group_label: "Counts"
+  #}
 
   measure: session_count {
     type: count_distinct
