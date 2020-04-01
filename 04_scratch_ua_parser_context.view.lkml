@@ -41,7 +41,7 @@ view: scratch_pv_04 {
         FROM wall_e_snowplow.snowplow_web_ua_parser_context AS ua
 
         INNER JOIN ${scratch_pv_00.SQL_TABLE_NAME} AS wp
-          ON ua.root_id = wp.root_id
+          ON ua.page_view_id = wp.page_view_id
 
         GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13
 
