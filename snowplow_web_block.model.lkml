@@ -15,43 +15,34 @@
 # Copyright:   Copyright (c) 2016 Snowplow Analytics Ltd
 # License:     Apache License Version 2.0
 
-- view: scratch_pv_00
-  derived_table:
-    sql: |
-      WITH prep AS (
+connection: "ostap_test_connection"
 
-        -- deduplicate the web page context in 2 steps
+# include all views in this project
+include: "*.view"
 
-        SELECT
+# include all dashboards in this project
+include: "*.dashboard"
 
-          root_id,
-          id AS page_view_id
+explore: page_views {
+  join: sessions {
+    sql_on: page_views.session_id = sessions.session_id
+      ;;
+    relationship: many_to_one
+  }
 
-        FROM atomic.com_snowplowanalytics_snowplow_web_page_1
+  join: users {
+    sql_on: page_views.user_snowplow_domain_id = users.user_snowplow_domain_id
+      ;;
+    relationship: many_to_one
+  }
+}
 
-        GROUP BY 1,2
+explore: sessions {
+  join: users {
+    sql_on: sessions.user_snowplow_domain_id = users.user_snowplow_domain_id
+      ;;
+    relationship: many_to_one
+  }
+}
 
-      )
-
-      SELECT * FROM prep WHERE root_id NOT IN (SELECT root_id FROM prep GROUP BY 1 HAVING COUNT(*) > 1) -- exclude all root ID with more than one page view ID
-
-    sql_trigger_value: SELECT MAX(collector_tstamp) FROM atomic.events
-    distkey: page_view_id
-    sortkeys: page_view_id
-
-  fields:
-
-  # DIMENSIONS #
-
-  - dimension: root_id
-    type: string
-    sql: ${TABLE}.root_id
-
-  - dimension_group: page_view_id
-    type: string
-    sql: ${TABLE}.page_view_id
-
-  # MEASURES #
-
-  - measure: count
-    type: count
+explore: users {}
