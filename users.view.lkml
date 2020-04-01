@@ -88,7 +88,7 @@ view: users {
 
       WHERE a.session_index = 1
        ;;
-    sql_trigger_value: SELECT COUNT(*) FROM ${sessions.SQL_TABLE_NAME} ;;
+    # sql_trigger_value: SELECT COUNT(*) FROM ${sessions.SQL_TABLE_NAME} ;;
     distribution: "domain_userid"
     sortkeys: ["first_session_start"]
   }

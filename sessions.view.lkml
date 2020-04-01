@@ -126,7 +126,7 @@ view: sessions {
 
             WHERE a.page_view_in_session_index = 1
              ;;
-    sql_trigger_value: SELECT COUNT(*) FROM ${page_views.SQL_TABLE_NAME} ;;
+    # sql_trigger_value: SELECT COUNT(*) FROM ${page_views.SQL_TABLE_NAME} ;;
     distribution: "user_snowplow_domain_id"
     sortkeys: ["session_start"]
   }

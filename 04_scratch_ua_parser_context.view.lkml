@@ -49,7 +49,7 @@ view: scratch_pv_04 {
 
       SELECT * FROM prep WHERE page_view_id NOT IN (SELECT page_view_id FROM prep GROUP BY 1 HAVING COUNT(*) > 1) -- exclude all root ID with more than one page view ID
        ;;
-    sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_03.SQL_TABLE_NAME} ;;
+    # sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_03.SQL_TABLE_NAME} ;;
     distribution: "page_view_id"
     sortkeys: ["page_view_id"]
   }

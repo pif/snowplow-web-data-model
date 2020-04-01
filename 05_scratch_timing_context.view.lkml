@@ -19,7 +19,7 @@ view: scratch_pv_05 {
   derived_table: {
     sql: SELECT * FROM wall_e_snowplow.snowplow_web_timing_context
        ;;
-    sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_04.SQL_TABLE_NAME} ;;
+    # sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_04.SQL_TABLE_NAME} ;;
     distribution: "page_view_id"
     sortkeys: ["page_view_id"]
   }
