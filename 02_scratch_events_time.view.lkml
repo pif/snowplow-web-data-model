@@ -38,7 +38,7 @@ view: scratch_pv_02 {
 
       GROUP BY 1
        ;;
-    sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_01.SQL_TABLE_NAME} ;;
+    # sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_01.SQL_TABLE_NAME} ;;
     distribution: "page_view_id"
     sortkeys: ["page_view_id"]
   }

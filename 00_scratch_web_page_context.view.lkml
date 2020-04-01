@@ -34,7 +34,7 @@ view: scratch_pv_00 {
 
       SELECT * FROM prep WHERE root_id NOT IN (SELECT root_id FROM prep GROUP BY 1 HAVING COUNT(*) > 1) -- exclude all root ID with more than one page view ID
        ;;
-    sql_trigger_value: SELECT MAX(collector_tstamp) FROM analytics.snowplow_events ;;
+    # sql_trigger_value: SELECT MAX(collector_tstamp) FROM analytics.snowplow_events ;;
     distribution: "page_view_id"
     sortkeys: ["page_view_id"]
   }

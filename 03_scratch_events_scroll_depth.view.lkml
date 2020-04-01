@@ -76,7 +76,7 @@ view: scratch_pv_03 {
 
       FROM prep
        ;;
-    sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_02.SQL_TABLE_NAME} ;;
+    # sql_trigger_value: SELECT COUNT(*) FROM ${scratch_pv_02.SQL_TABLE_NAME} ;;
     distribution: "page_view_id"
     sortkeys: ["page_view_id"]
   }
