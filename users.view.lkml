@@ -127,12 +127,12 @@ view: users {
   dimension: first_session_start_window {
     case: {
       when: {
-        sql: ${first_session_start_time} >= DATEADD(day, -28, GETDATE()) ;;
+        sql: ${first_session_start_time} >= CURRENT_DATE - INTERVAL '28 DAY' ;;
         label: "current_period"
       }
 
       when: {
-        sql: ${first_session_start_time} >= DATEADD(day, -56, GETDATE()) AND ${first_session_start_time} < DATEADD(day, -28, GETDATE()) ;;
+        sql: ${first_session_start_time} >=  (now() - interval '56 day') AND ${first_session_start_time} <  (now() - interval '28 day') ;;
         label: "previous_period"
       }
 

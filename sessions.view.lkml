@@ -225,11 +225,11 @@ view: sessions {
   dimension: session_start_window {
     case: {
       when: {
-        sql: ${session_start_time} >= DATEADD(day, -28, GETDATE()) ;;
+        sql: ${session_start_time} >= (now() - interval '28 day') ;;
         label: "current_period"
       }
       when: {
-        sql: ${session_start_time} >= DATEADD(day, -56, GETDATE()) AND ${session_start_time} < DATEADD(day, -28, GETDATE()) ;;
+        sql: ${session_start_time} >= (now() - interval '56 day') AND ${session_start_time} <  (now() - interval '28 day') ;;
         label: "previous_period"
       }
       else: "unknown"
